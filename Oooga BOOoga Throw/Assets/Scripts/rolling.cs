@@ -13,16 +13,46 @@ public class rolling : MonoBehaviour
     public bool isrolling;
     public bool fall;
 
+    public int randnum1;
+    public int randnum2;
+
+
+    public float timer;
+    private float timedifference;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
+        timedifference = 1f;
+        timer = 0f;
+        randnum1 = (Random.Range(1, 3));
+        randnum2 = (Random.Range(1, 3));
     }
 
     // Update is called once per frame
     void Update()
     {
         velocity = myRB.velocity;
+
+        if(fall == true)
+        {
+            this.GetComponent<CircleCollider2D>().isTrigger = true;
+            timer += Time.deltaTime;
+            if (timer >= timedifference)
+            {
+                timer = 0;
+                fall = false;
+            }
+        }
+
+        else if(fall == false)
+        {
+            this.GetComponent<CircleCollider2D>().isTrigger = false;
+        }
+
 
         myRB.velocity = velocity;
     }
@@ -49,6 +79,15 @@ public class rolling : MonoBehaviour
             StartCoroutine("rollR");
             myRB.velocity = velocity;
         }
+        if (collision.gameObject.name.Contains("trapdoor"))
+        {
+            
+            if (GameObject.Find("trapdoor").GetComponent<FallingController>().ranum1 == randnum1 || (GameObject.Find("trapdoor").GetComponent<FallingController>().ranum1 == randnum2))
+            {
+                fall = true;
+                StartCoroutine("falling");
+            }
+        }
     }
 
     private IEnumerator rollL()
@@ -65,6 +104,15 @@ public class rolling : MonoBehaviour
         while(rolR == true)
         {
             velocity.x = 15;
+            myRB.velocity = velocity;
+            yield return null;
+        }
+    }
+    private IEnumerator falling()
+    {
+        while (fall == true)
+        {
+            velocity.y = -5;
             myRB.velocity = velocity;
             yield return null;
         }
