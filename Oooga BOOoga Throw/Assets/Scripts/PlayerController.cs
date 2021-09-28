@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
 
     public bool climbing;
     public int climpos;
-
-
+    public float distance;
+    public LayerMask WhatIsLadder;
+    //public float inputVertical;
 
     private Rigidbody2D myRB;
     private Vector2 velocity;
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 groundDetection;
     public float groundDetectDistance = .15f;
     private Quaternion zero;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -40,11 +43,37 @@ public class PlayerController : MonoBehaviour
             velocity.y = jumpheight;
         }
 
-        if (climbing == true)
-        {
-            StartCoroutine("climb");
-            myRB.velocity = velocity;
-        }
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.up, distance, WhatIsLadder);
+        
+            if(hitInfo.collider !=null)
+            {
+                if(Input.GetKeyDown(KeyCode.W))
+                {
+                velocity.y = movementspeed;
+                myRB.velocity = velocity;
+                climbing = true;
+                }
+
+                if(Input.GetKeyDown(KeyCode.S))
+                {
+                velocity.y = -movementspeed;
+                myRB.velocity = velocity;
+                }
+            }
+            else
+            {
+            climbing = false;
+            }
+            if(climbing == true)
+            {
+                
+                myRB.gravityScale = 0;
+            
+            }
+            else
+            {
+            myRB.gravityScale = 1;
+            }
 
         myRB.velocity = velocity;
     }
@@ -52,7 +81,7 @@ public class PlayerController : MonoBehaviour
  
     private void OnTriggerStay2D(Collider2D collision)
     {
-        myRB.constraints = RigidbodyConstraints2D.FreezePositionY;
+        //myRB.constraints = RigidbodyConstraints2D.FreezePositionY;
         climbing = true;
     }
     private void OnTriggerExit2D(Collider2D other)
@@ -60,20 +89,4 @@ public class PlayerController : MonoBehaviour
         climbing = false;
     }
 
-    private IEnumerator climb()
-    {
-        while(climbing == true)
-        {
-            
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                myRB.constraints = RigidbodyConstraints2D.None;
-                velocity.y = 4;
-                
-            }
-            myRB.velocity = velocity;
-        }
-
-        yield return null;
-    }
 }

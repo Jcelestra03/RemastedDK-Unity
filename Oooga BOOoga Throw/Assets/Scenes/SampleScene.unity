@@ -1347,7 +1347,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1771067300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1360,6 +1360,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15dde92445e516f408b428dc30e0239c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  climbing: 0
+  climpos: 0
+  distance: 0
+  WhatIsLadder:
+    serializedVersion: 2
+    m_Bits: 256
   movementspeed: 7
   jumpheight: 10
   groundDetectDistance: 0.1
