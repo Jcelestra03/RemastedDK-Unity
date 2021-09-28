@@ -37,4 +37,14 @@ public class PlayerController : MonoBehaviour
 
         myRB.velocity = velocity;
     }
+
+    private void OnCollision2D(Collider2D collision)
+    {
+        if (collision.gameObject.name.Contains("barrel"))
+        {
+            Debug.Log("hit!");
+        }
+    }
+
+
 }

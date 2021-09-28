@@ -32,6 +32,11 @@ public class rolling : MonoBehaviour
         randnum2 = (Random.Range(1, 3));
     }
 
+
+
+
+
+
     // Update is called once per frame
     void Update()
     {
@@ -56,6 +61,14 @@ public class rolling : MonoBehaviour
 
         myRB.velocity = velocity;
     }
+
+
+
+
+
+
+
+
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -88,7 +101,27 @@ public class rolling : MonoBehaviour
                 StartCoroutine("falling");
             }
         }
+
+        if(collision.gameObject.name.Contains("trapd2"))
+        {
+
+            if (GameObject.Find("trapd2").GetComponent<FallingController>().ranum1 == randnum1 || (GameObject.Find("trapd2").GetComponent<FallingController>().ranum1 == randnum2))
+            {
+                fall = true;
+                StartCoroutine("falling");
+            }
+        }
     }
+
+
+
+
+
+
+
+
+
+
 
     private IEnumerator rollL()
     {
