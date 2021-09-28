@@ -6,6 +6,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    public bool climbing;
+    public int climpos;
+
+
+
     private Rigidbody2D myRB;
     private Vector2 velocity;
     public int movementspeed = 5;
@@ -35,16 +40,40 @@ public class PlayerController : MonoBehaviour
             velocity.y = jumpheight;
         }
 
+        if (climbing == true)
+        {
+            StartCoroutine("climb");
+            myRB.velocity = velocity;
+        }
+
         myRB.velocity = velocity;
     }
 
-    private void OnCollision2D(Collider2D collision)
+ 
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Contains("barrel"))
-        {
-            Debug.Log("hit!");
-        }
+        myRB.constraints = RigidbodyConstraints2D.FreezePositionY;
+        climbing = true;
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        climbing = false;
     }
 
+    private IEnumerator climb()
+    {
+        while(climbing == true)
+        {
+            
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                myRB.constraints = RigidbodyConstraints2D.None;
+                velocity.y = 4;
+                
+            }
+            myRB.velocity = velocity;
+        }
 
+        yield return null;
+    }
 }
