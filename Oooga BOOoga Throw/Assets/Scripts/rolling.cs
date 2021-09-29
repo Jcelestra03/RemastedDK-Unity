@@ -20,7 +20,7 @@ public class rolling : MonoBehaviour
     public float timer;
     private float timedifference;
 
-
+    public GameObject spawnpoint;
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +64,14 @@ public class rolling : MonoBehaviour
 
 
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name.Contains("despawn"))
+        {
+            transform.position = spawnpoint.transform.position;
 
+        }
+    }
 
 
 
@@ -111,6 +118,8 @@ public class rolling : MonoBehaviour
                 StartCoroutine("falling");
             }
         }
+
+
     }
 
 
