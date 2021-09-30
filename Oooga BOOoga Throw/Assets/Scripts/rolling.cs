@@ -68,9 +68,11 @@ public class rolling : MonoBehaviour
     {
         if (collision.gameObject.name.Contains("despawn"))
         {
-            transform.position = spawnpoint.transform.position;
+            Destroy(gameObject);
 
         }
+
+
     }
 
 
@@ -118,7 +120,10 @@ public class rolling : MonoBehaviour
                 StartCoroutine("falling");
             }
         }
-
+        if(collision.gameObject.name.Contains("shield"))
+        {
+            Destroy(gameObject);
+        }
 
     }
 

@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour
     public float powertimer2;
     public float powertimer3;
 
+    public float timer1;
+    public float timer2;
+    public float timer3;
+
+
 
 
     //ladder shit
@@ -32,8 +37,8 @@ public class PlayerController : MonoBehaviour
     //basic movement
     private Rigidbody2D myRB;
     private Vector2 velocity;
-    public int movementspeed = 5;
-    public float jumpheight = 5f;
+    public int movementspeed;
+    public float jumpheight;
     public float jumptimer;
     private Vector2 groundDetection;
     public float groundDetectDistance = .15f;
@@ -54,6 +59,9 @@ public class PlayerController : MonoBehaviour
         myRB = GetComponent<Rigidbody2D>();
         zero = new Quaternion();
         pON = false;
+        powertimer = 1500;
+        powertimer2 = 2000;
+        powertimer3 = 2500;
     }
 
     // Update is called once per frame
@@ -73,33 +81,36 @@ public class PlayerController : MonoBehaviour
         if(speedpower == true)
         {
             StartCoroutine("speed");
-            movementspeed = 7;
+            movementspeed = 10;
         }
         else if (shieldpower == true)
         {
             StartCoroutine("shield");
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            GameObject.Find("shield").GetComponent<BoxCollider2D>().enabled = true;
         }
         else if (jumppower == true)
         {
             StartCoroutine("jump");
-            jumpheight = 8;
+            jumpheight = 15;
         }
 
-
-
-
-
-
-
-
-        if (pON == false)
+        if(speedpower == false)
         {
-            movementspeed = 5;
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            jumpheight = 5;
+            movementspeed = 7;
         }
-        
+        if (shieldpower == false)
+        {
+            GameObject.Find("shield").GetComponent<BoxCollider2D>().enabled = false;
+        }
+        if (jumppower == false)
+        {
+            jumpheight = 11;
+        }
+
+
+
+
+
 
 
 
@@ -175,7 +186,11 @@ public class PlayerController : MonoBehaviour
     {
         while (speedpower == true)
         {
-
+            timer1 += Time.deltaTime;
+            if(timer1 >= powertimer)
+            {
+                speedpower = false;
+            }
             yield return null;
         }
     }
@@ -184,7 +199,11 @@ public class PlayerController : MonoBehaviour
     {
         while (shieldpower == true)
         {
-
+            timer2 += Time.deltaTime;
+            if(timer2 >= powertimer2)
+            {
+                shieldpower = false;
+            }
             yield return null;
         }
     }
@@ -193,7 +212,11 @@ public class PlayerController : MonoBehaviour
     {
         while (jumppower == true)
         {
-
+            timer3 += Time.deltaTime;
+            if(timer3 >= powertimer3)
+            {
+                jumppower = false;
+            }
             yield return null;
         }
     }
