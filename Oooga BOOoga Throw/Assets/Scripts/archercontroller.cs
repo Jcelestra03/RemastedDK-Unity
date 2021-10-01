@@ -39,6 +39,7 @@ public class archercontroller : MonoBehaviour
                 b.GetComponent<Rigidbody2D>().rotation = angle;
                 b.GetComponent<Rigidbody2D>().velocity = new Vector2(lookPos.x * bulletspeed, lookPos.y * bulletspeed);
                 
+                
                 Destroy(b, bulletLifespan);
                 canshoot = false;
             }

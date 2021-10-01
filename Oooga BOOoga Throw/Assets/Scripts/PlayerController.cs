@@ -205,6 +205,14 @@ public class PlayerController : MonoBehaviour
         climbing = false;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.name.Contains("wintrigger"))
+        {
+            GameObject.Find("GM").GetComponent<GameManager>().loadlevel2();
+        }
+    }
+
     private IEnumerator speed()
     {
         while (speedpower == true)
