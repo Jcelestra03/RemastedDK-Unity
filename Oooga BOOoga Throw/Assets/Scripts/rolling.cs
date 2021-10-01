@@ -72,7 +72,10 @@ public class rolling : MonoBehaviour
 
         }
 
-
+        if (collision.gameObject.name.Contains("barrel"))
+        {
+            Destroy(gameObject);
+        }
     }
 
 

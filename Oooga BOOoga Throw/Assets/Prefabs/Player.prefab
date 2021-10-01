@@ -108,12 +108,14 @@ MonoBehaviour:
   shieldpower: 0
   speedpower: 0
   jumppower: 0
-  powertimer: 0
-  powertimer2: 0
-  powertimer3: 0
+  powertimer: 1500
+  powertimer2: 2000
+  powertimer3: 2500
   timer1: 0
   timer2: 0
   timer3: 0
+  timer: 0
+  timedifference: 1
   climbing: 0
   climbspeed: 0
   distance: 0
@@ -124,6 +126,7 @@ MonoBehaviour:
   jumpheight: 10
   jumptimer: 0
   groundDetectDistance: 0.1
+  canjump: 0
   spawnpoint: {fileID: 6510035501375570459, guid: 4b1ff0ddc6785444ab59b6164abee914, type: 3}
 --- !u!50 &1685115550825249050
 Rigidbody2D:

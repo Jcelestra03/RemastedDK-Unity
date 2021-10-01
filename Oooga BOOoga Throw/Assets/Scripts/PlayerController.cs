@@ -16,10 +16,14 @@ public class PlayerController : MonoBehaviour
     public float powertimer2;
     public float powertimer3;
 
+
+    //timers
     public float timer1;
     public float timer2;
     public float timer3;
 
+    public float timer;
+    public float timedifference;
 
 
 
@@ -46,6 +50,10 @@ public class PlayerController : MonoBehaviour
 
 
 
+    //movement restrictions
+    public bool canjump;
+
+
 
 
 
@@ -59,9 +67,7 @@ public class PlayerController : MonoBehaviour
         myRB = GetComponent<Rigidbody2D>();
         zero = new Quaternion();
         pON = false;
-        powertimer = 1500;
-        powertimer2 = 2000;
-        powertimer3 = 2500;
+
     }
 
     // Update is called once per frame
@@ -72,12 +78,25 @@ public class PlayerController : MonoBehaviour
 
         groundDetection = new Vector2(transform.position.x, transform.position.y - 1.1f);
 
-        if (Input.GetKeyDown(KeyCode.Space) && Physics2D.Raycast(groundDetection, Vector2.down, groundDetectDistance))
+        if (canjump || jumppower == true)
         {
-            velocity.y = jumpheight;
+            if (Input.GetKeyDown(KeyCode.Space) && Physics2D.Raycast(groundDetection, Vector2.down, groundDetectDistance))
+            {
+                velocity.y = jumpheight;
+                canjump = false;
+            }
+            
         }
-
-
+        else if (!canjump)
+        {
+            timer += Time.deltaTime;
+            if(timer >= timedifference)
+            {
+                canjump = true;
+                timer = 0;
+            }
+        }
+    
         if(speedpower == true)
         {
             StartCoroutine("speed");
@@ -166,6 +185,10 @@ public class PlayerController : MonoBehaviour
             transform.position = spawnpoint.transform.position;
         }
         if(collision.gameObject.name.Contains("barrel"))
+        {
+            transform.position = spawnpoint.transform.position;
+        }
+        if (collision.gameObject.name.Contains("Arrow"))
         {
             transform.position = spawnpoint.transform.position;
         }

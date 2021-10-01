@@ -18,7 +18,7 @@ public class archercontroller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bcooldown = 5;
+        
         isfollowing = false;
         playertarget = GameObject.Find("Player");
 
@@ -35,8 +35,10 @@ public class archercontroller : MonoBehaviour
             if (canshoot)
             {
                 GameObject b = Instantiate(bullet, gameObject.transform);
-
+                float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
+                b.GetComponent<Rigidbody2D>().rotation = angle;
                 b.GetComponent<Rigidbody2D>().velocity = new Vector2(lookPos.x * bulletspeed, lookPos.y * bulletspeed);
+                
                 Destroy(b, bulletLifespan);
                 canshoot = false;
             }
