@@ -55,6 +55,12 @@ public class PlayerController : MonoBehaviour
 
 
 
+    //audio
+    private AudioSource speaker;
+
+    public AudioClip mokey;
+
+
 
 
     //
@@ -64,6 +70,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        speaker = GetComponent<AudioSource>();
         myRB = GetComponent<Rigidbody2D>();
         zero = new Quaternion();
         pON = false;
@@ -209,6 +216,8 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.name.Contains("wintrigger"))
         {
+            speaker.clip = mokey;
+            speaker.Play();
             GameObject.Find("GM").GetComponent<GameManager>().loadlevel2();
         }
     }

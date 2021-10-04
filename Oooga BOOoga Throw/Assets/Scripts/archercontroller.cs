@@ -15,13 +15,21 @@ public class archercontroller : MonoBehaviour
     public float bcooldown;
     public bool canshoot;
 
+
+
+    //audio
+
+    private AudioSource speaker;
+    public AudioClip fire;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        speaker = GetComponent<AudioSource>();
         isfollowing = false;
         playertarget = GameObject.Find("Player");
-
+        speaker.clip = fire;
     }
 
     // Update is called once per frame
@@ -38,8 +46,9 @@ public class archercontroller : MonoBehaviour
                 float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
                 b.GetComponent<Rigidbody2D>().rotation = angle;
                 b.GetComponent<Rigidbody2D>().velocity = new Vector2(lookPos.x * bulletspeed, lookPos.y * bulletspeed);
+
                 
-                
+                speaker.Play();
                 Destroy(b, bulletLifespan);
                 canshoot = false;
             }
@@ -49,6 +58,7 @@ public class archercontroller : MonoBehaviour
                 timer += Time.deltaTime;
                 if (timer >= bcooldown)
                 {
+
                     canshoot = true;
                     timer = 0;
                 }

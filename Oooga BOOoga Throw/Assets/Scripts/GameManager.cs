@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     }
     public void loadlevel2()
     {
-        StartCoroutine(levelLoader("Level2", 2));
+        StartCoroutine(levelLoader("Level2", 3));
     }
 
     IEnumerator levelLoader(string levelName, int waitTime)
