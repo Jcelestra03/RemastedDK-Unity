@@ -119,7 +119,7 @@ MonoBehaviour:
   bulletLifespan: 0.5
   bullet: {fileID: 4523698059443416913, guid: 5bc854a0253278c4e99ed4e7030ab072, type: 3}
   timer: 0
-  bcooldown: 1.5
+  bcooldown: 2
   canshoot: 0
   fire: {fileID: 0}
 --- !u!82 &-4077259555030577363

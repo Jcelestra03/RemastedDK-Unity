@@ -109,9 +109,9 @@ MonoBehaviour:
   shieldpower: 0
   speedpower: 0
   jumppower: 0
-  powertimer: 1500
-  powertimer2: 2000
-  powertimer3: 2500
+  powertimer: 2000
+  powertimer2: 2500
+  powertimer3: 3000
   timer1: 0
   timer2: 0
   timer3: 0
