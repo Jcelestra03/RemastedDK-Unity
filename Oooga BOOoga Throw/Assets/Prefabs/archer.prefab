@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isfollowing: 0
   playertarget: {fileID: 0}
-  bulletspeed: 40
+  bulletspeed: 35
   bulletLifespan: 0.5
   bullet: {fileID: 4523698059443416913, guid: 5bc854a0253278c4e99ed4e7030ab072, type: 3}
   timer: 0
