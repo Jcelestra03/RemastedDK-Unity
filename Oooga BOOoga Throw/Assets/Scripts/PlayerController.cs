@@ -17,6 +17,11 @@ public class PlayerController : MonoBehaviour
     public float powertimer3;
 
 
+
+
+
+
+
     //timers
     public float timer1;
     public float timer2;
@@ -84,6 +89,8 @@ public class PlayerController : MonoBehaviour
         velocity.x = Input.GetAxisRaw("Horizontal") * movementspeed;
 
         groundDetection = new Vector2(transform.position.x, transform.position.y - 1.1f);
+
+
 
         if (canjump || jumppower == true)
         {
@@ -222,39 +229,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator speed()
+    public IEnumerator speed()
     {
         while (speedpower == true)
         {
             timer1 += Time.deltaTime;
             if(timer1 >= powertimer)
             {
+                timer1 = 0;
                 speedpower = false;
             }
             yield return null;
         }
     }
 
-    private IEnumerator shield()
+    public IEnumerator shield()
     {
         while (shieldpower == true)
         {
             timer2 += Time.deltaTime;
             if(timer2 >= powertimer2)
             {
+                timer2 = 0;
                 shieldpower = false;
             }
             yield return null;
         }
     }
 
-    private IEnumerator jump()
+    public IEnumerator jump()
     {
         while (jumppower == true)
         {
             timer3 += Time.deltaTime;
             if(timer3 >= powertimer3)
             {
+                timer3 = 0;
                 jumppower = false;
             }
             yield return null;
