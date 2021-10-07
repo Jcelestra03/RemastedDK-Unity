@@ -22,9 +22,15 @@ public class rolling : MonoBehaviour
 
     public GameObject spawnpoint;
 
+
+    private AudioSource speaker;
+
+    public AudioClip nya;
+    public AudioClip nyanya;
     // Start is called before the first frame update
     void Start()
     {
+        speaker = GetComponent<AudioSource>();
         myRB = GetComponent<Rigidbody2D>();
         timedifference = 1f;
         timer = 0f;
@@ -75,6 +81,11 @@ public class rolling : MonoBehaviour
         if (collision.gameObject.name.Contains("barrel"))
         {
             Destroy(gameObject);
+        }
+        if(collision.gameObject.name.Contains("floor"))
+        {
+            speaker.clip = nya;
+            speaker.Play();
         }
     }
 

@@ -49,14 +49,17 @@ public class PowerController : MonoBehaviour
         {
             if(pw1 == true)
             {
+                GameObject.Find("SoundsObject").GetComponent<sounds>().Pu1 = true;
                 GameObject.Find("Player").GetComponent<PlayerController>().speedpower = true;
             }
             else if (pw2 == true)
             {
+                GameObject.Find("SoundsObject").GetComponent<sounds>().Pu2 = true;
                 GameObject.Find("Player").GetComponent<PlayerController>().shieldpower = true;
             }
             else if (pw3 == true)
             {
+                GameObject.Find("SoundsObject").GetComponent<sounds>().Pu3 = true;
                 GameObject.Find("Player").GetComponent<PlayerController>().jumppower = true;
             }
             Destroy(gameObject);

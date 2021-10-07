@@ -20,8 +20,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-
-
     //timers
     public float timer1;
     public float timer2;
@@ -37,9 +35,9 @@ public class PlayerController : MonoBehaviour
     public int climbspeed;
     public float distance = 1f;
     public LayerMask WhatIsLadder;
- 
 
 
+    public int deaths;
 
 
 
@@ -63,8 +61,9 @@ public class PlayerController : MonoBehaviour
     //audio
     private AudioSource speaker;
 
-    public AudioClip mokey;
+    public AudioClip jsound;
 
+    public AudioClip mokey;
 
 
 
@@ -96,6 +95,8 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) && Physics2D.Raycast(groundDetection, Vector2.down, groundDetectDistance))
             {
+                speaker.clip = jsound;
+                speaker.Play();
                 velocity.y = jumpheight;
                 canjump = false;
             }
@@ -141,7 +142,10 @@ public class PlayerController : MonoBehaviour
         }
 
 
-
+        if(deaths >= 10)
+        {
+            GameObject.Find("GM").GetComponent<GameManager>().loss();
+        }
 
 
 
@@ -196,14 +200,17 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.name.Contains("despawn"))
         {
+            deaths = deaths + 1;
             transform.position = spawnpoint.transform.position;
         }
         if(collision.gameObject.name.Contains("barrel"))
         {
+            deaths = deaths + 1;
             transform.position = spawnpoint.transform.position;
         }
         if (collision.gameObject.name.Contains("Arrow"))
         {
+            deaths = deaths + 1;
             transform.position = spawnpoint.transform.position;
         }
     }
@@ -231,11 +238,14 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator speed()
     {
+        
         while (speedpower == true)
         {
+            
             timer1 += Time.deltaTime;
             if(timer1 >= powertimer)
             {
+                GameObject.Find("SoundsObject").GetComponent<sounds>().Pu1 = false;
                 timer1 = 0;
                 speedpower = false;
             }
@@ -245,11 +255,13 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator shield()
     {
+        
         while (shieldpower == true)
         {
             timer2 += Time.deltaTime;
             if(timer2 >= powertimer2)
             {
+                GameObject.Find("SoundsObject").GetComponent<sounds>().Pu2 = false;
                 timer2 = 0;
                 shieldpower = false;
             }
@@ -259,11 +271,13 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator jump()
     {
+        
         while (jumppower == true)
         {
             timer3 += Time.deltaTime;
             if(timer3 >= powertimer3)
             {
+                GameObject.Find("SoundsObject").GetComponent<sounds>().Pu3 = false;
                 timer3 = 0;
                 jumppower = false;
             }
