@@ -8,10 +8,10 @@ public class PlayerController : MonoBehaviour
 
 
     //powerups
+    public List<bool> powerUps = new List<bool>();
+    // [0] = jump; [1] = speed; [2] = shield
     public bool pON;
-    public bool shieldpower;
-    public bool speedpower;
-    public bool jumppower;
+    
     public float powertimer;
     public float powertimer2;
     public float powertimer3;
@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
     public float jumptimer;
     private Vector2 groundDetection;
     public float groundDetectDistance = .15f;
-    private Quaternion zero;
 
 
 
@@ -76,7 +75,6 @@ public class PlayerController : MonoBehaviour
     {
         speaker = GetComponent<AudioSource>();
         myRB = GetComponent<Rigidbody2D>();
-        zero = new Quaternion();
         pON = false;
 
     }
@@ -91,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (canjump || jumppower == true)
+        if (canjump || powerUps[0] == true)
         {
             if (Input.GetKeyDown(KeyCode.Space) && Physics2D.Raycast(groundDetection, Vector2.down, groundDetectDistance))
             {
@@ -112,31 +110,31 @@ public class PlayerController : MonoBehaviour
             }
         }
     
-        if(speedpower == true)
+        if(powerUps[1] == true)
         {
             StartCoroutine("speed");
             movementspeed = 10;
         }
-        else if (shieldpower == true)
+        else if (powerUps[2] == true)
         {
             StartCoroutine("shield");
             GameObject.Find("shield").GetComponent<BoxCollider2D>().enabled = true;
         }
-        else if (jumppower == true)
+        else if (powerUps[0] == true)
         {
             StartCoroutine("jump");
             jumpheight = 15;
         }
 
-        if(speedpower == false)
+        if(powerUps[1] == false)
         {
             movementspeed = 7;
         }
-        if (shieldpower == false)
+        if (powerUps[2] == false)
         {
             GameObject.Find("shield").GetComponent<BoxCollider2D>().enabled = false;
         }
-        if (jumppower == false)
+        if (powerUps[0] == false)
         {
             jumpheight = 11;
         }
@@ -174,13 +172,13 @@ public class PlayerController : MonoBehaviour
             }
             if(climbing == true)
             {
-                this.GetComponent<CircleCollider2D>().isTrigger = true;
+                GetComponent<CircleCollider2D>().isTrigger = true;
                 myRB.gravityScale = 0;
             
             }
             else
             {
-                this.GetComponent<CircleCollider2D>().isTrigger = false;
+                GetComponent<CircleCollider2D>().isTrigger = false;
                 myRB.gravityScale = 2;
             }
 
@@ -239,7 +237,7 @@ public class PlayerController : MonoBehaviour
     public IEnumerator speed()
     {
         
-        while (speedpower == true)
+        while (powerUps[1] == true)
         {
             
             timer1 += Time.deltaTime;
@@ -247,7 +245,7 @@ public class PlayerController : MonoBehaviour
             {
                 GameObject.Find("SoundsObject").GetComponent<sounds>().Pu1 = false;
                 timer1 = 0;
-                speedpower = false;
+                powerUps[1] = false;
             }
             yield return null;
         }
@@ -256,14 +254,14 @@ public class PlayerController : MonoBehaviour
     public IEnumerator shield()
     {
         
-        while (shieldpower == true)
+        while (powerUps[2] == true)
         {
             timer2 += Time.deltaTime;
             if(timer2 >= powertimer2)
             {
                 GameObject.Find("SoundsObject").GetComponent<sounds>().Pu2 = false;
                 timer2 = 0;
-                shieldpower = false;
+                powerUps[2] = false;
             }
             yield return null;
         }
@@ -272,14 +270,14 @@ public class PlayerController : MonoBehaviour
     public IEnumerator jump()
     {
         
-        while (jumppower == true)
+        while (powerUps[0] == true)
         {
             timer3 += Time.deltaTime;
             if(timer3 >= powertimer3)
             {
                 GameObject.Find("SoundsObject").GetComponent<sounds>().Pu3 = false;
                 timer3 = 0;
-                jumppower = false;
+                powerUps[0] = false;
             }
             yield return null;
         }

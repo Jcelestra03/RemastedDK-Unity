@@ -21,21 +21,21 @@ public class PowerController : MonoBehaviour
         if (Rpower == 1)
         {
             pw1 = true;
-            this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             pw2 = false;
             pw3 = false;
         }
         else if (Rpower == 2)
         {
             pw2 = true;
-            this.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
             pw1 = false;
             pw3 = false;
         }
         else if (Rpower == 3)
         {
             pw3 = true;
-            this.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+            gameObject.GetComponent<SpriteRenderer>().color = Color.green;
             pw2 = false;
             pw1 = false;
         }
@@ -50,17 +50,17 @@ public class PowerController : MonoBehaviour
             if(pw1 == true)
             {
                 GameObject.Find("SoundsObject").GetComponent<sounds>().Pu1 = true;
-                GameObject.Find("Player").GetComponent<PlayerController>().speedpower = true;
+                GameObject.Find("Player").GetComponent<PlayerController>().powerUps[1] = true;
             }
             else if (pw2 == true)
             {
                 GameObject.Find("SoundsObject").GetComponent<sounds>().Pu2 = true;
-                GameObject.Find("Player").GetComponent<PlayerController>().shieldpower = true;
+                GameObject.Find("Player").GetComponent<PlayerController>().powerUps[2] = true;
             }
             else if (pw3 == true)
             {
                 GameObject.Find("SoundsObject").GetComponent<sounds>().Pu3 = true;
-                GameObject.Find("Player").GetComponent<PlayerController>().jumppower = true;
+                GameObject.Find("Player").GetComponent<PlayerController>().powerUps[0] = true;
             }
             Destroy(gameObject);
         }

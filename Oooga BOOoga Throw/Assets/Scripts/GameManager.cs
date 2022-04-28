@@ -57,28 +57,28 @@ public class GameManager : MonoBehaviour
             timer += Time.deltaTime;
         }
 
-        if (GameObject.Find("Player").GetComponent<PlayerController>().shieldpower == true)
+        if (GameObject.Find("Player").GetComponent<PlayerController>().powerUps[2] == true)
         {
             img4.enabled = true;
         }
-        else if (GameObject.Find("Player").GetComponent<PlayerController>().jumppower == true)
+        else if (GameObject.Find("Player").GetComponent<PlayerController>().powerUps[0] == true)
         {
             img3.enabled = true;
         }
-        else if (GameObject.Find("Player").GetComponent<PlayerController>().speedpower == true)
+        else if (GameObject.Find("Player").GetComponent<PlayerController>().powerUps[1] == true)
         {
             img2.enabled = true;
         }
 
-        if (GameObject.Find("Player").GetComponent<PlayerController>().shieldpower == false)
+        if (GameObject.Find("Player").GetComponent<PlayerController>().powerUps[2] == false)
         {
             img4.enabled = false;
         }
-        if (GameObject.Find("Player").GetComponent<PlayerController>().jumppower == false)
+        if (GameObject.Find("Player").GetComponent<PlayerController>().powerUps[0] == false)
         {
             img3.enabled = false;
         }
-        if (GameObject.Find("Player").GetComponent<PlayerController>().speedpower == false)
+        if (GameObject.Find("Player").GetComponent<PlayerController>().powerUps[1] == false)
         {
             img2.enabled = false;
         }

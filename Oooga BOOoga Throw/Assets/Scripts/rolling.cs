@@ -50,7 +50,7 @@ public class rolling : MonoBehaviour
 
         if(fall == true)
         {
-            this.GetComponent<CircleCollider2D>().isTrigger = true;
+            GetComponent<CircleCollider2D>().isTrigger = true;
             timer += Time.deltaTime;
             if (timer >= timedifference)
             {
@@ -61,10 +61,8 @@ public class rolling : MonoBehaviour
 
         else if(fall == false)
         {
-            this.GetComponent<CircleCollider2D>().isTrigger = false;
+            GetComponent<CircleCollider2D>().isTrigger = false;
         }
-
-
         myRB.velocity = velocity;
     }
 
@@ -91,10 +89,7 @@ public class rolling : MonoBehaviour
 
 
 
-
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void LR(Collider2D collision)
     {
         if (collision.gameObject.name.Contains("trigger"))
         {
@@ -105,7 +100,6 @@ public class rolling : MonoBehaviour
             StartCoroutine("rollL");
             myRB.velocity = velocity;
         }
-
         if (collision.gameObject.name.Contains("trigger2"))
         {
             rolL = false;
@@ -115,6 +109,13 @@ public class rolling : MonoBehaviour
             StartCoroutine("rollR");
             myRB.velocity = velocity;
         }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        LR(collision);
+
         if (collision.gameObject.name.Contains("trapdoor"))
         {
             

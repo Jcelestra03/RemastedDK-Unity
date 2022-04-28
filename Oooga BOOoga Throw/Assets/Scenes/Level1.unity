@@ -3540,6 +3540,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1685115550825249053, guid: f2a4d0336157155449976dc01d21fc21, type: 3}
+      propertyPath: powerUps.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685115550825249053, guid: f2a4d0336157155449976dc01d21fc21, type: 3}
       propertyPath: spawnpoint
       value: 
       objectReference: {fileID: 1961686352}

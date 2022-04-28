@@ -143,8 +143,8 @@ MonoBehaviour:
   randnum2: 0
   timer: 0
   spawnpoint: {fileID: 1381361000106142699, guid: 48cf1e8b8f8a04142b84911cd133e8e9, type: 3}
-  nya: {fileID: 8300000, guid: 724256f793d7b584d8f682124c6876d2, type: 3}
-  nyanya: {fileID: 8300000, guid: b258cdce0f02aa643a491794846d13b4, type: 3}
+  nya: {fileID: 0}
+  nyanya: {fileID: 0}
 --- !u!82 &-6346552260665384683
 AudioSource:
   m_ObjectHideFlags: 0
